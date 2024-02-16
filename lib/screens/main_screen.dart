@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:auth5/model/termin.dart';
 import 'package:auth5/widgets/add_termin.dart';
 import 'package:auth5/widgets/sign_in.dart';
@@ -7,6 +5,8 @@ import 'package:auth5/widgets/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'calendar_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -32,7 +32,8 @@ class _MainScreenState extends State<MainScreen> {
           return GestureDetector(
             onTap: () {},
             behavior: HitTestBehavior.opaque,
-            child: NewTermin(//widgetot za dodavanje na nov todo so se naoga vo folderot /widgets
+            child: NewTermin(
+              //widgetot za dodavanje na nov termin so se naoga vo folderot /widgets
               addTermin: _addNewTerminToList,
             ),
           );
@@ -106,6 +107,12 @@ class _MainScreenState extends State<MainScreen> {
                 Icons.account_box,
                 color: Colors.yellow,
               )),
+          IconButton(
+              onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  CalendarScreen(termini: _termini,)),
+                  ),
+              icon: const Icon(Icons.calendar_month)),
           if (userSignedIn)
             IconButton(
                 onPressed: _addTodoFunction,
@@ -128,7 +135,7 @@ class _MainScreenState extends State<MainScreen> {
                     color: Colors.deepPurpleAccent),
               ),
               subtitle: Text(
-                _termini[index].time+"h " +_termini[index].date ,
+                _termini[index].time + "h " + _termini[index].date,
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
