@@ -2,7 +2,6 @@ import 'package:auth5/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +13,9 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
+  const MyApp({super.key});
+  // FirebaseMessaging messaging = FirebaseMessaging.instance;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
