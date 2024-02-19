@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'calendar_screen.dart';
-
+import 'package:auth5/widgets/map.dart';
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -84,12 +84,11 @@ class _MainScreenState extends State<MainScreen> {
         });
   }
 
-
   Future<void> setupInteractedMessage() async {
     // Get any messages which caused the application to open from
     // a terminated state.
     RemoteMessage? initialMessage =
-    await FirebaseMessaging.instance.getInitialMessage();
+        await FirebaseMessaging.instance.getInitialMessage();
 
     // If the message also contains a data property with a "type" of "chat",
     // navigate to a chat screen
@@ -103,10 +102,9 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _handleMessage(RemoteMessage message) {
-      // Navigator.pushNamed(context, ExtractArgumentsScreen.route,
-      //   arguments: message,
-      // );
-
+    // Navigator.pushNamed(context, ExtractArgumentsScreen.route,
+    //   arguments: message,
+    // );
   }
 
   @override
@@ -145,9 +143,16 @@ class _MainScreenState extends State<MainScreen> {
           IconButton(
               onPressed: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  CalendarScreen(termini: _termini,)),
+                    MaterialPageRoute(
+                        builder: (context) => CalendarScreen(
+                              termini: _termini,
+                            )),
                   ),
               icon: const Icon(Icons.calendar_month)),
+          IconButton(
+              onPressed: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) =>  Map(termini: _termini,))),
+              icon: const Icon(Icons.map_outlined,color: Colors.deepOrangeAccent,)),
           if (userSignedIn)
             IconButton(
                 onPressed: _addTodoFunction,
